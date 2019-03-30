@@ -1,7 +1,11 @@
 <template>
-  <div id="login">
-    <p>Welcome back, get signed in!</p>
+  <div id="signup">
+    <p>Welcome! Sign up to the world's leading photo sharing social network right here:</p>
     <form @submit.prevent="onSubmit">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input v-model.trim="name" type="text" id="name" />
+      </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input v-model.trim="email" type="email" placeholder="you@youremail.com" id="email" />
@@ -10,11 +14,11 @@
         <label for="password">Password</label>
         <input v-model.trim="password" type="password" id="password" />
       </div>
-      <button type="submit" class="btn">Log In</button>
+      <button type="submit" class="btn">Sign Up</button>
     </form>
     <div class="swaps">
       <a href="#" @click.prevent="swapView('ForgotPassword')">Forgot Password</a>
-      <a href="#" @click.prevent="swapView('Signup')">Create an Account</a>
+      <a href="#" @click.prevent="swapView('Login')">Login</a>
     </div>
   </div>
 </template>
@@ -30,19 +34,31 @@ enum Mode {
 }
 
 @Component({
-    methods: mapActions(['login']),
+    methods: mapActions(['signup']),
 })
-export default class Login extends Vue {
+export default class Signup extends Vue {
     // For Vuex
-    private login: any;
+    private signup: any;
 
     @Prop(Function) private readonly swapView!: (mode: Mode) => void;
 
+    private name: string = '';
     private email: string = '';
     private password: string = '';
 
     private onSubmit(): void {
-        this.login({ email: this.email, password: this.password });
+        this.signup({
+            name: this.name,
+            email: this.email,
+            password: this.password,
+        });
+        this.resetFields();
+    }
+
+    private resetFields(): void {
+        this.name = '';
+        this.email = '';
+        this.password = '';
     }
 }
 </script>

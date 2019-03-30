@@ -4,6 +4,7 @@ import router from '@/router';
 import firebase from 'firebase';
 
 interface Credentials {
+  name?: string;
   email: string;
   password: string;
 }
@@ -27,6 +28,23 @@ export default class Auth extends VuexModule {
   }
 
   @Action
+  public async signup(data: Credentials) {
+    const { name, email, password } = data;
+    try {
+      const user = await auth.createUserWithEmailAndPassword(email, password);
+      this.context.commit('setCurrentUser', user.user);
+      await this.context.dispatch('addUserToCollection', {
+        user: user.user,
+        name,
+      });
+      this.context.dispatch('fetchUserProfile');
+      router.push('/dashboard');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  @Action
   public async fetchUserProfile() {
     if (this.currentUser) {
       try {
@@ -36,6 +54,19 @@ export default class Auth extends VuexModule {
         console.log(err);
       }
     }
+  }
+
+  @Action
+  private async addUserToCollection({
+    user,
+    name,
+  }: {
+    user: firebase.User;
+    name: string;
+  }) {
+    return users.doc(user.uid).set({
+      name,
+    });
   }
 
   @Mutation
