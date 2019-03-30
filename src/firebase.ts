@@ -1,9 +1,5 @@
 import firebase from 'firebase';
-
-const config = {
-  databaseURL: 'https://vokeh-b49ab.firebaseio.com',
-  projectId: 'vokeh-b49ab'
-};
+import config from './config';
 
 firebase.initializeApp(config);
 

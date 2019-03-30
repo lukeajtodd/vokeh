@@ -9,12 +9,12 @@ Vue.config.productionTip = false;
 
 let app: any;
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
   if (!app) {
     app = new Vue({
       router,
       store,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount('#app');
   }
 });
