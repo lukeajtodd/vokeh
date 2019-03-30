@@ -1,14 +1,31 @@
 <template>
   <div id="login">
     <p>Welcome back, get signed in!</p>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" novalidate>
       <div class="form-group">
         <label for="email">Email</label>
-        <input v-model.trim="email" type="email" placeholder="you@youremail.com" id="email" />
+        <input
+          id="email" 
+          name="email"
+          type="email"
+          placeholder="you@youremail.com"
+          v-model.trim="email"
+          v-validate="'required|email'"
+          required
+        />
+        <span>{{ errors.first('email') }}</span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input v-model.trim="password" type="password" id="password" />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          v-model.trim="password"
+          v-validate="'required|password'"
+          required
+        />
+        <span>{{ errors.first('password') }}</span>
       </div>
       <button type="submit" class="btn">Log In</button>
     </form>
@@ -24,25 +41,29 @@ import { Prop, Component, Vue } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
 
 enum Mode {
-    Login = 'Login',
-    Signup = 'Signup',
-    Forgot = 'ForgotPassword',
+  Login = 'Login',
+  Signup = 'Signup',
+  Forgot = 'ForgotPassword',
 }
 
 @Component({
-    methods: mapActions(['login']),
+  methods: mapActions(['login']),
+  inject: ['$validator'],
 })
 export default class Login extends Vue {
-    // For Vuex
-    private login: any;
+  // For Vuex
+  private login: any;
 
-    @Prop(Function) private readonly swapView!: (mode: Mode) => void;
+  @Prop(Function) private readonly swapView!: (mode: Mode) => void;
 
-    private email: string = '';
-    private password: string = '';
+  private email: string = '';
+  private password: string = '';
 
-    private onSubmit(): void {
-        this.login({ email: this.email, password: this.password });
+  private async onSubmit(): Promise<void> {
+    const result = await this.$validator.validate();
+    if (result) {
+      this.login({ email: this.email, password: this.password });
     }
+  }
 }
 </script>

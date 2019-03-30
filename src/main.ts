@@ -3,7 +3,17 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { auth } from './firebase';
+import VeeValidate from 'vee-validate';
 import './registerServiceWorker';
+
+Vue.use(VeeValidate, {
+  events: 'keyup|change',
+  classes: true,
+  inject: false,
+  classNames: {
+    invalid: 'is-invalid',
+  },
+});
 
 Vue.config.productionTip = false;
 
