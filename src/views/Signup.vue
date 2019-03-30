@@ -4,40 +4,36 @@
     <form @submit.prevent="onSubmit" novalidate>
       <div class="form-group">
         <label for="name">Name</label>
-        <input
+        <Input
           id="name"
           name="name"
-          type="text" 
-          v-model.trim="name"
-          v-validate="'required'"
-          required
+          type="name"
+          validationRules="required"
+          :isRequired="true"
+          @changed="updateState"
         />
-        <span>{{ errors.first('name') }}</span>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input
+        <Input
           id="email"
           name="email"
           type="email"
-          placeholder="you@youremail.com"
-          v-model.trim="email"
-          v-validate="'required|email'"
-          required
+          validationRules="required|email"
+          :isRequired="true"
+          @changed="updateState"
         />
-        <span>{{ errors.first('email') }}</span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input
+        <Input
           id="password"
           name="password"
           type="password"
-          v-model.trim="password"
-          v-validate="'required'"
-          required
+          validationRules="required"
+          :isRequired="true"
+          @changed="updateState"
         />
-        <span>{{ errors.first('password') }}</span>
       </div>
       <button type="submit" class="btn">Sign Up</button>
     </form>
@@ -49,8 +45,11 @@
 </template>
 
 <script lang="ts">
-import { Prop, Component, Vue } from 'vue-property-decorator';
+import { Prop, Component, Vue, Mixins } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
+
+import Input from '@/components/Input.vue';
+import UpdateState from '@/mixins/updateState';
 
 enum Mode {
   Login = 'Login',
@@ -60,9 +59,10 @@ enum Mode {
 
 @Component({
   methods: mapActions(['signup']),
+  components: { Input },
   inject: ['$validator'],
 })
-export default class Signup extends Vue {
+export default class Signup extends Mixins(UpdateState) {
   // For Vuex
   private signup: any;
 
