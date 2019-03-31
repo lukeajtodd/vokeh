@@ -70,7 +70,6 @@ export default class ForgotPassword extends Mixins(UpdateState, HandleError) {
     if (result) {
       const err = this.resetPassword(this.email);
       this.handleError(err).then((response: boolean) => {
-        // Meaning no errors
         if (response) {
           this.swapView(Mode.Login);
         }
