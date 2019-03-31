@@ -10,7 +10,7 @@
           @change="inputChange"
           :required="isRequired"
         />
-        <span>{{ errors.first(name) }}</span>
+        <span class="has-errors">{{ errors.first(name) }}</span>
     </div>
 </template>
 

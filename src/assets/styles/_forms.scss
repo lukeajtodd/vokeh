@@ -1,0 +1,58 @@
+form,
+.form {
+  &-group {
+    position: relative;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .has-errors {
+      display: block;
+      color: $input-error;
+      font-size: 0.8rem;
+      padding-top: 0.8rem;
+    }
+  }
+
+  label {
+    color: $white;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    border: 2px solid $white;
+    background: transparent;
+    color: $white;
+    width: 100%;
+    height: 42px;
+    border-radius: $border-radius;
+    padding-left: 0.6rem;
+
+    &:focus {
+      outline: none;
+      box-shadow: 6px 6px 0px 0px $orange;
+    }
+
+    &::placeholder {
+      color: rgba($white, 0.8);
+      opacity: 1;
+    }
+
+    &.is-invalid {
+      border-color: $input-error;
+    }
+  }
+
+  button[type='submit'] {
+    background-color: $orange;
+    color: $white;
+    height: 42px;
+    width: 50%;
+    border-radius: $border-radius;
+  }
+}

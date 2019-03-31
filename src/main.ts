@@ -6,6 +6,12 @@ import { auth } from './firebase';
 import VeeValidate from 'vee-validate';
 import './registerServiceWorker';
 
+import 'reset-css';
+import 'typeface-rock-salt';
+import 'typeface-poppins';
+import '@/assets/styles/tailwind.css';
+import '@/assets/styles/main.scss';
+
 Vue.use(VeeValidate, {
   events: 'keyup|change',
   classes: true,

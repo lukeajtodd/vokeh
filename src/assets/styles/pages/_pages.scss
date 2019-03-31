@@ -1,0 +1,18 @@
+.page {
+  z-index: 2;
+  &__inner {
+    .intro {
+      color: $white;
+      margin-bottom: 2rem;
+      font-size: 1.4rem;
+      max-width: 400px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .swaps {
+      text-align: right;
+      margin-top: 2rem;
+    }
+  }
+}

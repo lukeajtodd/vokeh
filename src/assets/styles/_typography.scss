@@ -1,0 +1,19 @@
+.logo {
+  font-family: 'Rock Salt';
+  color: $white;
+  text-align: center;
+  margin-bottom: 3rem;
+  span:first-child {
+    @include rem('font-size', 48px);
+  }
+
+  span:last-child {
+    @include rem('font-size', 34px);
+  }
+}
+
+.page {
+  .swaps {
+    font-size: 0.8rem;
+  }
+}
