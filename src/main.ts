@@ -4,7 +4,10 @@ import router from './router';
 import store from './store';
 import { auth } from './firebase';
 import VeeValidate from 'vee-validate';
+import VueToasted from 'vue-toasted';
 import './registerServiceWorker';
+
+import Loader from './components/Loader.vue';
 
 import 'reset-css';
 import 'typeface-rock-salt';
@@ -20,6 +23,9 @@ Vue.use(VeeValidate, {
     invalid: 'is-invalid',
   },
 });
+Vue.use(VueToasted);
+
+Vue.component('loader', Loader);
 
 Vue.config.productionTip = false;
 

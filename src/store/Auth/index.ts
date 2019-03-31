@@ -18,12 +18,15 @@ export default class Auth extends VuexModule {
   public async login(data: Credentials) {
     const { email, password } = data;
     try {
+      this.context.commit('loading', true);
       const user = await auth.signInWithEmailAndPassword(email, password);
       this.context.commit('setCurrentUser', user.user);
       this.context.dispatch('fetchUserProfile');
       router.push('/dashboard');
+      this.context.commit('loading', false);
     } catch (err) {
-      console.log(err);
+      this.context.commit('loading', false);
+      return err;
     }
   }
 
@@ -31,6 +34,7 @@ export default class Auth extends VuexModule {
   public async signup(data: Credentials) {
     const { name, email, password } = data;
     try {
+      this.context.commit('loading', true);
       const user = await auth.createUserWithEmailAndPassword(email, password);
       this.context.commit('setCurrentUser', user.user);
       await this.context.dispatch('addUserToCollection', {
@@ -39,20 +43,18 @@ export default class Auth extends VuexModule {
       });
       this.context.dispatch('fetchUserProfile');
       router.push('/dashboard');
+      this.context.commit('loading', false);
     } catch (err) {
-      console.log(err);
+      this.context.commit('loading', false);
+      return err;
     }
   }
 
   @Action
   public async fetchUserProfile() {
     if (this.currentUser) {
-      try {
-        const res = await users.doc(this.currentUser.uid).get();
-        this.context.commit('setUserProfile', res.data());
-      } catch (err) {
-        console.log(err);
-      }
+      const res = await users.doc(this.currentUser.uid).get();
+      this.context.commit('setUserProfile', res.data());
     }
   }
 

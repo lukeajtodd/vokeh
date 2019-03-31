@@ -5,14 +5,19 @@
         <span>V</span>
         <span>okeh</span>
       </h1>
-      <component :is="currentView" :swapView="swapView"/>
+      <loader v-if="isLoading"/>
+      <component
+        :is="currentView"
+        :swapView="swapView"
+        v-else
+      />
     </section>
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Login from './Login.vue';
 import Signup from './Signup.vue';
@@ -25,6 +30,7 @@ enum Mode {
 
 @Component({
   methods: mapActions(['login']),
+  computed: mapState(['isLoading']),
   components: { Login, Signup },
 })
 export default class Home extends Vue {

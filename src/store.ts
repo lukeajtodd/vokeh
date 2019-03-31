@@ -9,4 +9,12 @@ export default new Vuex.Store({
   modules: {
     Auth,
   },
+  state: {
+    isLoading: false,
+  },
+  mutations: {
+    loading(state, payload) {
+      state.isLoading = payload;
+    },
+  },
 });

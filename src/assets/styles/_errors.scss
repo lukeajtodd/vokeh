@@ -1,0 +1,19 @@
+$error: #d01515;
+
+.toasted .primary.error,
+.toasted.toasted-primary.error {
+  background-color: $error;
+}
+
+.toasted .primary .action,
+.toasted.toasted-primary .action {
+  color: $white;
+}
+
+.toasted {
+  a {
+    &:after {
+      display: none !important;
+    }
+  }
+}

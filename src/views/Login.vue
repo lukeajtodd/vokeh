@@ -51,6 +51,7 @@ import { mapActions } from 'vuex';
 
 import Input from '@/components/Input.vue';
 import UpdateState from '@/mixins/updateState';
+import HandleError from '@/mixins/handleError';
 
 enum Mode {
   Login = 'Login',
@@ -63,7 +64,7 @@ enum Mode {
   components: { Input },
   inject: ['$validator'],
 })
-export default class Login extends Mixins(UpdateState) {
+export default class Login extends Mixins(UpdateState, HandleError) {
   // For Vuex
   private login: any;
 
@@ -75,7 +76,10 @@ export default class Login extends Mixins(UpdateState) {
   private async onSubmit(): Promise<void> {
     const result = await this.$validator.validate();
     if (result) {
-      this.login({ email: this.email, password: this.password });
+      const err = this.login({ email: this.email, password: this.password });
+      if (err) {
+        this.handleError(err);
+      }
     }
   }
 }
