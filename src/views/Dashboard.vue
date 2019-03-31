@@ -6,6 +6,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mapMutations } from 'vuex';
 
-export default class Dashboard extends Vue {}
+@Component({
+  methods: mapMutations(['loading']),
+})
+export default class Dashboard extends Vue {
+  // For Vuex
+  private loading: any;
+
+  private mounted() {
+    this.loading(false);
+  }
+}
 </script>

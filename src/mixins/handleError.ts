@@ -7,18 +7,23 @@ interface Error {
 
 @Component
 export default class HandleError extends Vue {
-  public handleError(error: Promise<Error>): void {
-    error.then((err) => {
-      this.$toasted.show(err.message ? err.message : 'Unknown Error', {
-        type: 'error',
-        duration: 4000,
-        action: {
-          text: 'Close',
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
+  public handleError(error: Promise<Error>): Promise<boolean> {
+    return error.then((err) => {
+      if (err && (err.code || err.message)) {
+        this.$toasted.show(err.message ? err.message : 'Unknown Error', {
+          type: 'error',
+          duration: 4000,
+          action: {
+            text: 'Close',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
           },
-        },
-      });
+        });
+        return false;
+      } else {
+        return true;
+      }
     });
   }
 }

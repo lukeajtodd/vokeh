@@ -77,9 +77,7 @@ export default class Login extends Mixins(UpdateState, HandleError) {
     const result = await this.$validator.validate();
     if (result) {
       const err = this.login({ email: this.email, password: this.password });
-      if (err) {
-        this.handleError(err);
-      }
+      this.handleError(err);
     }
   }
 }

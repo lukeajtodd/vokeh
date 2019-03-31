@@ -86,10 +86,11 @@ export default class Signup extends Mixins(UpdateState, HandleError) {
         email: this.email,
         password: this.password,
       });
-      this.resetFields();
-      if (err) {
-        this.handleError(err);
-      }
+      this.handleError(err).then((response: boolean) => {
+        if (!response) {
+          this.resetFields();
+        }
+      });
     }
   }
 

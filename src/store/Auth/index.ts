@@ -23,7 +23,6 @@ export default class Auth extends VuexModule {
       this.context.commit('setCurrentUser', user.user);
       this.context.dispatch('fetchUserProfile');
       router.push('/dashboard');
-      this.context.commit('loading', false);
     } catch (err) {
       this.context.commit('loading', false);
       return err;
@@ -43,7 +42,18 @@ export default class Auth extends VuexModule {
       });
       this.context.dispatch('fetchUserProfile');
       router.push('/dashboard');
+    } catch (err) {
       this.context.commit('loading', false);
+      return err;
+    }
+  }
+
+  @Action
+  public async resetPassword(email: string) {
+    try {
+      this.context.commit('loading', true);
+      await auth.sendPasswordResetEmail(email);
+      return true;
     } catch (err) {
       this.context.commit('loading', false);
       return err;
