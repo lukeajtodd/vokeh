@@ -1,6 +1,6 @@
 <template>
   <div class="feed__container">
-    <aside class="feed__you card"></aside>
+    <FeedControls />
     <main class="feed" id="grid">
       <Card v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="i" />
     </main>
@@ -11,6 +11,7 @@
 import { mapMutations } from 'vuex';
 
 import Card from '@/components/Card.vue';
+import FeedControls from '@/components/FeedControls.vue';
 
 export default {
   name: 'Feed',
@@ -20,6 +21,6 @@ export default {
   methods: {
     ...mapMutations(['loading']),
   },
-  components: { Card },
+  components: { Card, FeedControls },
 };
 </script>

@@ -15,5 +15,15 @@
     height: calc(100vh - 4rem);
     width: 15vw;
     margin: 2rem 1rem 2rem 2rem;
+
+    &.card--with-clip {
+      margin-top: ($clip-size / 2) + 32px;
+      height: calc(100vh - (4rem + #{($clip-size / 2) + 32px}));
+    }
+
+    .profile-clip__avatar {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }

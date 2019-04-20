@@ -1,7 +1,7 @@
 .profile-clip {
   position: absolute;
   top: 0;
-  left: 2rem;
+  left: 0;
   transform: translateY(-50%);
   width: 100%;
   height: $clip-size;
@@ -12,6 +12,8 @@
     border: 4px solid $white;
     width: $clip-size;
     height: $clip-size;
+    position: absolute;
+    left: 2rem;
 
     img {
       border-radius: 50%;
