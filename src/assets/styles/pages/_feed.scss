@@ -1,0 +1,19 @@
+.feed {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  height: 100vh;
+  width: 100%;
+  padding: 2rem 2rem 2rem 1rem;
+  overflow-y: scroll;
+
+  &__container {
+    display: flex;
+  }
+
+  &__you {
+    height: calc(100vh - 4rem);
+    width: 15vw;
+    margin: 2rem 1rem 2rem 2rem;
+  }
+}

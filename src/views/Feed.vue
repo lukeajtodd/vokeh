@@ -1,7 +1,10 @@
 <template>
-  <main class="feed">
-    
-  </main>
+  <div class="feed__container">
+    <aside class="feed__you card"></aside>
+    <main class="feed" id="grid">
+      <Card v-for="i in Array(20)" :key="i" />
+    </main>
+  </div>
 </template>
 
 <script>
