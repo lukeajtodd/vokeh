@@ -14,27 +14,44 @@
     </div>
 </template>
 
-<script lang="ts">
-import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
+<script>
 
-@Component({
+export default {
   inject: ['$validator'],
-})
-export default class Input extends Vue {
-  @Prop(String) private readonly id!: string;
-  @Prop(String) private readonly name!: string;
-  @Prop(String) private readonly type!: string;
-  @Prop(String) private readonly validationRules!: string;
-  @Prop({ default: '', type: String }) private readonly placeholder!: string;
-  @Prop({ default: false, type: Boolean })
-  private readonly isRequired!: boolean;
-
-  @Emit('changed')
-  private inputChange(e: Event) {
-    if (e) {
-      return { key: this.name, value: (e.target as HTMLInputElement).value };
-    }
-  }
-}
+  name: 'Input',
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    validationRules: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    isRequired: {
+      type: Boolean,
+      required: false,
+    },
+  },
+  methods: {
+    inputChange(e) {
+      if (e) {
+        this.$emit('changed', { key: this.name, value: e.target.value })
+      }
+    },
+  },
+};
 </script>
 

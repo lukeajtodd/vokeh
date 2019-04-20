@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
 
-import Home from './views/Home.vue';
+import Home from './views/Home';
 
 Vue.use(Router);
 
@@ -11,7 +11,7 @@ const router = new Router({
   routes: [
     {
       path: '*',
-      redirect: '/dashboard',
+      redirect: '/feed',
     },
     {
       path: '/',
@@ -19,13 +19,13 @@ const router = new Router({
       component: Home,
     },
     {
-      path: '/dashboard',
-      name: 'Dashboard',
+      path: '/feed',
+      name: 'Feed',
       meta: {
         requiresAuth: true,
       },
       component: () =>
-        import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue'),
+        import(/* webpackChunkName: "dashboard" */ './views/Feed.vue'),
     },
     {
       path: '/settings',

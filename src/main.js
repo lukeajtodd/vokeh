@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App.vue';
+import App from './App';
 import router from './router';
 import store from './store';
 import { auth } from './firebase';
@@ -7,7 +7,7 @@ import VeeValidate from 'vee-validate';
 import VueToasted from 'vue-toasted';
 import './registerServiceWorker';
 
-import Loader from './components/Loader.vue';
+import Loader from './components/Loader';
 
 import 'reset-css';
 import 'typeface-rock-salt';
@@ -29,7 +29,7 @@ Vue.component('loader', Loader);
 
 Vue.config.productionTip = false;
 
-let app: any;
+let app;
 
 auth.onAuthStateChanged((user) => {
   if (!app) {

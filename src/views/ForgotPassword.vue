@@ -20,13 +20,13 @@
       <a
         class="mr-4"
         href="#"
-        @click.prevent="swapView('Signup')"
+        @click.prevent="swapView('SIGNUP')"
       >
         Create an Account
       </a>
       <a
         href="#"
-        @click.prevent="swapView('Login')"
+        @click.prevent="swapView('LOGIN')"
       >
         Login
       </a>
@@ -34,48 +34,46 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Prop, Component, Vue, Mixins } from 'vue-property-decorator';
+<script>
 import { mapActions, mapMutations } from 'vuex';
+
+import { Mode } from '@/models/Mode';
 
 import Input from '@/components/Input.vue';
 import UpdateState from '@/mixins/updateState';
 import HandleError from '@/mixins/handleError';
 
-enum Mode {
-  Login = 'Login',
-  Signup = 'Signup',
-  Forgot = 'ForgotPassword',
-}
-
-@Component({
+export default {
+  inject: ['$validator'],
+  mixins: [UpdateState, HandleError],
+  name: 'ForgotPassword',
+  data() {
+    return {
+      email: '',
+    };
+  },
+  props: {
+    swapView: {
+      type: Function,
+      required: true,
+    },
+  },
   methods: {
-    ...mapActions(['resetPassword']),
+    ...mapActions('Auth', ['resetPassword']),
     ...mapMutations(['loading']),
+    async onSubmit() {
+      const result = await this.$validator.validate();
+      if (result) {
+        const err = this.resetPassword(this.email);
+        this.handleError(err).then((response) => {
+          if (response) {
+            this.swapView(Mode.LOGIN);
+          }
+          this.loading(false);
+        });
+      }
+    },
   },
   components: { Input },
-  inject: ['$validator'],
-})
-export default class ForgotPassword extends Mixins(UpdateState, HandleError) {
-  // For Vuex
-  private resetPassword: any;
-  private loading: any;
-
-  @Prop(Function) private readonly swapView!: (mode: Mode) => void;
-
-  private email: string = '';
-
-  private async onSubmit(): Promise<void> {
-    const result = await this.$validator.validate();
-    if (result) {
-      const err = this.resetPassword(this.email);
-      this.handleError(err).then((response: boolean) => {
-        if (response) {
-          this.swapView(Mode.Login);
-        }
-        this.loading(false);
-      });
-    }
-  }
-}
+};
 </script>

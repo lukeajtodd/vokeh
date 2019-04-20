@@ -41,7 +41,7 @@
     <div class="swaps">
       <a
         href="#"
-        @click.prevent="swapView('Login')"
+        @click.prevent="swapView('LOGIN')"
       >
         Login
       </a>
@@ -49,55 +49,55 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Prop, Component, Vue, Mixins } from 'vue-property-decorator';
+<script>
 import { mapActions } from 'vuex';
 
 import Input from '@/components/Input.vue';
 import UpdateState from '@/mixins/updateState';
 import HandleError from '@/mixins/handleError';
 
-enum Mode {
-  Login = 'Login',
-  Signup = 'Signup',
-  Forgot = 'ForgotPassword',
-}
-
-@Component({
-  methods: mapActions(['signup']),
-  components: { Input },
+export default {
   inject: ['$validator'],
-})
-export default class Signup extends Mixins(UpdateState, HandleError) {
-  // For Vuex
-  private signup: any;
-
-  @Prop(Function) private readonly swapView!: (mode: Mode) => void;
-
-  private name: string = '';
-  private email: string = '';
-  private password: string = '';
-
-  private async onSubmit(): Promise<void> {
-    const result = await this.$validator.validate();
-    if (result) {
-      const err = this.signup({
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      });
-      this.handleError(err).then((response: boolean) => {
-        if (!response) {
-          this.resetFields();
-        }
-      });
-    }
-  }
-
-  private resetFields(): void {
-    this.name = '';
-    this.email = '';
-    this.password = '';
-  }
-}
+  mixins: [UpdateState, HandleError],
+  name: 'Signup',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+    };
+  },
+  props: {
+    swapView: {
+      type: Function,
+      required: true,
+    },
+  },
+  methods: {
+    ...mapActions('Auth', ['signup']),
+    async onSubmit() {
+      const result = await this.$validator.validate();
+      if (result) {
+        const err = this.signup({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        });
+        this.handleError(err).then((response) => {
+          if (!response) {
+            this.resetFields();
+          }
+        });
+      }
+    },
+    resetFields() {
+      this.name = '';
+      this.email = '';
+      this.password = '';
+    },
+  },
+  components: {
+    Input,
+  },
+};
 </script>

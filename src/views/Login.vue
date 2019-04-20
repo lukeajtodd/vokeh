@@ -31,13 +31,13 @@
       <a
         class="mr-4"
         href="#"
-        @click.prevent="swapView('ForgotPassword')"
+        @click.prevent="swapView('FORGOT')"
       >
         Forgot Password
       </a>
       <a
         href="#"
-        @click.prevent="swapView('Signup')"
+        @click.prevent="swapView('SIGNUP')"
       >
         Create an Account
       </a>
@@ -45,40 +45,41 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Prop, Component, Vue, Mixins } from 'vue-property-decorator';
+<script>
 import { mapActions } from 'vuex';
 
 import Input from '@/components/Input.vue';
 import UpdateState from '@/mixins/updateState';
 import HandleError from '@/mixins/handleError';
 
-enum Mode {
-  Login = 'Login',
-  Signup = 'Signup',
-  Forgot = 'ForgotPassword',
-}
-
-@Component({
-  methods: mapActions(['login']),
-  components: { Input },
+export default {
   inject: ['$validator'],
-})
-export default class Login extends Mixins(UpdateState, HandleError) {
-  // For Vuex
-  private login: any;
-
-  @Prop(Function) private readonly swapView!: (mode: Mode) => void;
-
-  private email: string = '';
-  private password: string = '';
-
-  private async onSubmit(): Promise<void> {
-    const result = await this.$validator.validate();
-    if (result) {
-      const err = this.login({ email: this.email, password: this.password });
-      this.handleError(err);
+  mixins: [UpdateState, HandleError],
+  name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: ''
     }
+  },
+  props: {
+    swapView: {
+      type: Function,
+      required: true
+    }
+  },
+  methods: {
+    ...mapActions('Auth', ['login']),
+    async onSubmit() {
+      const result = await this.$validator.validate();
+      if (result) {
+        const err = this.login({ email: this.email, password: this.password });
+        this.handleError(err);
+      }
+    }
+  },
+  components: {
+    Input
   }
 }
 </script>

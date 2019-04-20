@@ -4,11 +4,9 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
 
-@Component
-export default class Navigation extends Vue {
-    @Prop() private msg!: string;
-}
+export default {
+  name: 'Navigation',
+};
 </script>

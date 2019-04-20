@@ -9,7 +9,6 @@
     "test:unit": "jest"
   },
   "dependencies": {
-    "@types/lodash.get": "^4.4.6",
     "firebase": "^5.9.2",
     "lodash.get": "^4.4.2",
     "register-service-worker": "^1.6.2",
@@ -18,41 +17,32 @@
     "typeface-rock-salt": "0.0.72",
     "vee-validate": "^2.2.0",
     "vue": "^2.6.6",
-    "vue-class-component": "^6.3.2",
-    "vue-property-decorator": "^8.0.0",
     "vue-router": "^3.0.1",
     "vue-toasted": "^1.1.26",
     "vuex": "^3.0.1",
-    "vuex-class": "^0.3.2",
-    "vuex-module-decorators": "^0.9.8",
     "vuexfire": "^3.0.0-alpha.15"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-pwa": "^3.5.0",
-    "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "jest": "^24.5.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "tailwindcss": "^0.7.4",
-    "ts-jest": "^24.0.0",
-    "typescript": "^3.2.1",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.5.21"
   },
   "jest": {
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?)$",
     "moduleFileExtensions": [
       "js",
-      "ts",
       "json",
       "vue"
     ],
     "transform": {
-      ".*\\.(vue)$": "vue-jest",
-      "^.+\\.tsx?$": "ts-jest"
+      ".*\\.(vue)$": "vue-jest"
     },
     "testURL": "http://localhost/"
   }
