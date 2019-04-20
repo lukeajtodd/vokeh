@@ -28,17 +28,10 @@
       <button type="submit" class="block mx-auto">Log In</button>
     </form>
     <div class="swaps">
-      <a
-        class="mr-4"
-        href="#"
-        @click.prevent="swapView('FORGOT')"
-      >
+      <a class="link mr-4" href="#" @click.prevent="swapView('FORGOT')">
         Forgot Password
       </a>
-      <a
-        href="#"
-        @click.prevent="swapView('SIGNUP')"
-      >
+      <a class="link" href="#" @click.prevent="swapView('SIGNUP')">
         Create an Account
       </a>
     </div>
@@ -59,14 +52,14 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   props: {
     swapView: {
       type: Function,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     ...mapActions('Auth', ['login']),
@@ -76,10 +69,10 @@ export default {
         const err = this.login({ email: this.email, password: this.password });
         this.handleError(err);
       }
-    }
+    },
   },
   components: {
-    Input
-  }
-}
+    Input,
+  },
+};
 </script>

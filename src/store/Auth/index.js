@@ -22,6 +22,16 @@ export default {
         return err;
       }
     },
+    async logout(ctx) {
+      console.log('logout');
+      try {
+        await auth.signOut();
+        ctx.dispatch('clearData');
+        router.replace('/');
+      } catch (err) {
+        return err;
+      }
+    },
     async signup(ctx, data) {
       const { name, email, password } = data;
       try {
@@ -59,6 +69,10 @@ export default {
       return users.doc(user.uid).set({
         name,
       });
+    },
+    clearData(ctx) {
+      ctx.commit('setCurrentUser', null);
+      ctx.commit('setUserProfile', null);
     },
   },
   mutations: {

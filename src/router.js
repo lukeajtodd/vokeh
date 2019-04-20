@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
+import store from './store';
 
 import Home from './views/Home';
 
@@ -44,8 +45,10 @@ router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
 
   if (requiresAuth && !currentUser) {
-    next('/login');
+    next('/');
   } else if (requiresAuth && currentUser) {
+    store.commit('Auth/setCurrentUser', currentUser);
+    store.dispatch('Auth/fetchUserProfile');
     next();
   } else {
     next();

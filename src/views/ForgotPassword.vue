@@ -1,6 +1,8 @@
 <template>
   <div id="forgot_password" class="page__inner">
-    <p class="intro">Reset your password. An email will be sent to complete the reset.</p>
+    <p class="intro">
+      Reset your password. An email will be sent to complete the reset.
+    </p>
     <form @submit.prevent="onSubmit" novalidate>
       <div class="form-group">
         <label for="email">Email</label>
@@ -17,17 +19,10 @@
       <button type="submit" class="block mx-auto">Reset</button>
     </form>
     <div class="swaps">
-      <a
-        class="mr-4"
-        href="#"
-        @click.prevent="swapView('SIGNUP')"
-      >
+      <a class="link mr-4" href="#" @click.prevent="swapView('SIGNUP')">
         Create an Account
       </a>
-      <a
-        href="#"
-        @click.prevent="swapView('LOGIN')"
-      >
+      <a class="link" href="#" @click.prevent="swapView('LOGIN')">
         Login
       </a>
     </div>

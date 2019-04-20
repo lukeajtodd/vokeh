@@ -22,7 +22,7 @@
   }
 }
 
-a {
+a.link {
   display: inline-block;
   color: $white;
   text-decoration: none;
@@ -48,6 +48,15 @@ a {
 
   &:hover:after {
     opacity: 1;
+  }
+}
+
+a.link-icon {
+  color: $black;
+
+  &:hover,
+  &:active {
+    color: $orange;
   }
 }
 

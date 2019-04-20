@@ -11,10 +11,25 @@
     display: flex;
   }
 
-  &__you {
+  &-sidebar {
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 4rem);
     width: 20vw;
     margin: 2rem 1rem 2rem 2rem;
+
+    &__controls {
+      display: flex;
+      margin-top: auto;
+    }
+
+    &__settings {
+      margin-left: auto;
+    }
+
+    .link-icon {
+      @include rem('font-size', 18px);
+    }
 
     &.card--with-clip {
       margin-top: ($clip-size / 2) + 32px;

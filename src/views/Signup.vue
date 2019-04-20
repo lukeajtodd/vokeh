@@ -1,6 +1,9 @@
 <template>
   <div id="signup" class="page__inner">
-    <p class="intro">Welcome! Sign up to the world's leading photo sharing social network right here:</p>
+    <p class="intro">
+      Welcome! Sign up to the world's leading photo sharing social network right
+      here:
+    </p>
     <form @submit.prevent="onSubmit" novalidate>
       <div class="form-group">
         <label for="name">Name</label>
@@ -39,10 +42,7 @@
       <button type="submit" class="block mx-auto">Sign Up</button>
     </form>
     <div class="swaps">
-      <a
-        href="#"
-        @click.prevent="swapView('LOGIN')"
-      >
+      <a class="link" href="#" @click.prevent="swapView('LOGIN')">
         Login
       </a>
     </div>
