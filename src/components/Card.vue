@@ -1,28 +1,26 @@
 <template>
-  <div class="card">
+  <div class="card card--with-clip">
+    <ProfileClip />
     <ul class="card__images" v-masonry>
       <li class="card__image" v-masonry-tile>
+        <VImage @loaded="hasLoaded" src="https://source.unsplash.com/random" />
+      </li>
+      <li class="card__image" v-masonry-tile>
         <VImage
           @loaded="hasLoaded"
-          :src="require('@/assets/images/alps.jpg')"
+          src="https://source.unsplash.com/user/erondu/likes"
         />
       </li>
       <li class="card__image" v-masonry-tile>
         <VImage
           @loaded="hasLoaded"
-          :src="require('@/assets/images/agility.jpg')"
+          src="https://source.unsplash.com/collection/190727"
         />
       </li>
       <li class="card__image" v-masonry-tile>
         <VImage
           @loaded="hasLoaded"
-          :src="require('@/assets/images/drone.jpg')"
-        />
-      </li>
-      <li class="card__image" v-masonry-tile>
-        <VImage
-          @loaded="hasLoaded"
-          :src="require('@/assets/images/lighthouse.jpg')"
+          src="https://source.unsplash.com/user/erondu"
         />
       </li>
     </ul>
@@ -31,6 +29,7 @@
 
 <script>
 import VImage from './VImage';
+import ProfileClip from './ProfileClip';
 
 export default {
   name: 'Card',
@@ -56,6 +55,7 @@ export default {
   },
   components: {
     VImage,
+    ProfileClip,
   },
 };
 </script>

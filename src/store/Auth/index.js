@@ -50,8 +50,8 @@ export default {
       }
     },
     async fetchUserProfile(ctx) {
-      if (this.currentUser) {
-        const res = await users.doc(this.currentUser.uid).get();
+      if (ctx.state.currentUser) {
+        const res = await users.doc(ctx.state.currentUser.uid).get();
         ctx.commit('setUserProfile', res.data());
       }
     },

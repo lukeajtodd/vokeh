@@ -13,7 +13,6 @@ export default {
   },
   methods: {
     emitLoaded() {
-      console.log('loaded');
       this.$emit('loaded');
     },
   },
