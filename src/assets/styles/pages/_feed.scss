@@ -1,7 +1,7 @@
 .feed {
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
   height: 100vh;
   width: 100%;
   padding: 2rem 2rem 2rem 1rem;
@@ -13,7 +13,7 @@
 
   &__you {
     height: calc(100vh - 4rem);
-    width: 15vw;
+    width: 20vw;
     margin: 2rem 1rem 2rem 2rem;
 
     &.card--with-clip {
