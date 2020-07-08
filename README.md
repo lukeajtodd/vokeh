@@ -37,7 +37,10 @@ npm run lint
 ## Issues
 
 - Validation problems when registering
+- Security vulnerabilite due to age of project
 
 ## Todo
 
 - Layout on dashboard
+- Move config for firebase to .env
+- Vue & other package updates
